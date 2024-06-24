@@ -1,17 +1,18 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { SongsModule } from './songs/songs.module';
-import { LoggerMiddleware } from './common/middleware/logger.middleware';
-import { SongsController } from './songs/songs.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
-import { Song } from './songs/song.entity';
-import { User } from './users/user.entity';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 import { Artist } from './artists/artist.entity';
+import { ArtistModule } from './artists/artist.module';
+import { LoggerMiddleware } from './common/middleware/logger.middleware';
+import { Song } from './songs/song.entity';
+import { SongsController } from './songs/songs.controller';
+import { SongsModule } from './songs/songs.module';
+import { User } from './users/user.entity';
 
 @Module({
-  imports: [
+  imports: [ArtistModule,
     SongsModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -27,9 +28,9 @@ import { Artist } from './artists/artist.entity';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule implements NestModule{
+export class AppModule implements NestModule {
 
-  constructor(private dataSource: DataSource){}
+  constructor(private dataSource: DataSource) { }
 
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(LoggerMiddleware).forRoutes(SongsController);
