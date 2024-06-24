@@ -1,4 +1,4 @@
-import { Controller, Get, Put, Delete, Post, Body, Param, ParseIntPipe, HttpStatus, HttpException } from '@nestjs/common';
+import { Controller, Get, Put, Delete, Post, Body, Param, ParseIntPipe, HttpStatus, HttpException, Query, DefaultValuePipe } from '@nestjs/common';
 import { SongsService } from './songs.service';
 import { CreateSongDTO } from './dto/create-song-dto';
 import { Song } from './song.entity';
@@ -18,18 +18,17 @@ export class SongsController {
     }
 
     @Get()
-    findAll() {
-        try {
-            return this.songsService.findAll();
-        } catch (e) {
-            throw new HttpException(
-                'server error',
-                HttpStatus.INTERNAL_SERVER_ERROR,
-                {
-                cause: e,
-                },
-            );
-        }
+    findAll(
+        @Query('page', new DefaultValuePipe(1), ParseIntPipe)
+        page = 1,
+        @Query('limit', new DefaultValuePipe(10), ParseIntPipe)
+        limit = 10,
+    ) {
+        limit = limit > 100 ? 100 : limit;
+        return this.songsService.paginate({
+            page,
+            limit,
+        });
     }
 
     @Get(':id')
