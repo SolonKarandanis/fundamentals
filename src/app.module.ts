@@ -10,9 +10,10 @@ import { Song } from './songs/song.entity';
 import { SongsController } from './songs/songs.controller';
 import { SongsModule } from './songs/songs.module';
 import { User } from './users/user.entity';
+import { UsersModule } from './users/users.module';
 
 @Module({
-  imports: [ArtistModule,
+  imports: [UsersModule, ArtistModule,
     SongsModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
