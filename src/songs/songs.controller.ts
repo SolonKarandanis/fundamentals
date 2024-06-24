@@ -1,6 +1,9 @@
 import { Controller, Get, Put, Delete, Post, Body, Param, ParseIntPipe, HttpStatus, HttpException } from '@nestjs/common';
 import { SongsService } from './songs.service';
 import { CreateSongDTO } from './dto/create-song-dto';
+import { Song } from './song.entity';
+import { UpdateSongDto } from './dto/update-song-dto';
+import { DeleteResult, UpdateResult } from 'typeorm';
 
 @Controller('songs')
 export class SongsController {
@@ -30,24 +33,27 @@ export class SongsController {
     }
 
     @Get(':id')
-    findOne(
-        @Param(
-          'id',
-          new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
-        )
-        id: number,
+  findOne(
+    @Param(
+      'id',
+      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
     )
-    {
-        return 'fetch song on the based on id';
-    }
+    id: number,
+  ): Promise<Song> {
+    return this.songsService.findOne(id);
+  }
 
-    @Put(':id')
-    update() {
-        return 'update song on the based on id';
-    }
 
-    @Delete(':id')
-    delete() {
-        return 'delete song on the based on id';
-    }
+  @Put(':id')
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateSongDTO: UpdateSongDto,
+  ): Promise<UpdateResult> {
+    return this.songsService.update(id, updateSongDTO);
+  }
+
+  @Delete(':id')
+  delete(@Param('id', ParseIntPipe) id: number): Promise<DeleteResult> {
+    return this.songsService.remove(id);
+  }
 }

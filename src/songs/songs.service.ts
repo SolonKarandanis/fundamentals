@@ -29,7 +29,7 @@ export class SongsService {
         //set the relation with artist and songs
         // song.artists = artists;
     
-        return this.songsRepository.save(song);
+        return await this.songsRepository.save(song);
     }
   
     findAll(): Promise<Song[]> {
