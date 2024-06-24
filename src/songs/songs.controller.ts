@@ -33,27 +33,27 @@ export class SongsController {
     }
 
     @Get(':id')
-  findOne(
-    @Param(
-      'id',
-      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
-    )
-    id: number,
-  ): Promise<Song> {
-    return this.songsService.findOne(id);
-  }
+    findOne(
+        @Param(
+        'id',
+        new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+        )
+        id: number,
+    ): Promise<Song> {
+        return this.songsService.findOne(id);
+    }
 
 
-  @Put(':id')
-  update(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() updateSongDTO: UpdateSongDto,
-  ): Promise<UpdateResult> {
-    return this.songsService.update(id, updateSongDTO);
-  }
+    @Put(':id')
+    update(
+        @Param('id', ParseIntPipe) id: number,
+        @Body() updateSongDTO: UpdateSongDto,
+    ): Promise<UpdateResult> {
+        return this.songsService.update(id, updateSongDTO);
+    }
 
-  @Delete(':id')
-  delete(@Param('id', ParseIntPipe) id: number): Promise<DeleteResult> {
-    return this.songsService.remove(id);
-  }
+    @Delete(':id')
+    delete(@Param('id', ParseIntPipe) id: number): Promise<DeleteResult> {
+        return this.songsService.remove(id);
+    }
 }
