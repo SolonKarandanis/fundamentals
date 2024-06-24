@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Artist } from './artists/artist.entity';
 import { ArtistModule } from './artists/artist.module';
+import { AuthModule } from './auth/auth.module';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import { Song } from './songs/song.entity';
 import { SongsController } from './songs/songs.controller';
@@ -13,7 +14,7 @@ import { User } from './users/user.entity';
 import { UsersModule } from './users/users.module';
 
 @Module({
-  imports: [UsersModule, ArtistModule,
+  imports: [AuthModule, UsersModule, ArtistModule,
     SongsModule,
     TypeOrmModule.forRoot({
       type: 'postgres',

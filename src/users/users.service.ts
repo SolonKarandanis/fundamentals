@@ -4,6 +4,8 @@ import { Repository, UpdateResult } from 'typeorm';
 import { User } from './user.entity';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { LoginDTO } from 'src/auth/dto/login.dto';
+import * as bcrypt from 'bcryptjs';
+import { v4 as uuid4 } from 'uuid';
 
 
 @Injectable()
@@ -18,10 +20,10 @@ export class UsersService {
     user.firstName = userDTO.firstName;
     user.lastName = userDTO.lastName;
     user.email = userDTO.email;
-    // user.apiKey = uuid4();
+    user.apiKey = uuid4();
 
-    // const salt = await bcrypt.genSalt(); // 2.
-    // user.password = await bcrypt.hash(userDTO.password, salt); // 3.
+    const salt = await bcrypt.genSalt(); // 2.
+    user.password = await bcrypt.hash(userDTO.password, salt); // 3.
 
     const savedUser = await this.userRepository.save(user);
     delete savedUser.password;
