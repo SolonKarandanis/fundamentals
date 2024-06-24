@@ -7,6 +7,8 @@ import { SongsController } from './songs/songs.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { Song } from './songs/song.entity';
+import { User } from './users/user.entity';
+import { Artist } from './artists/artist.entity';
 
 @Module({
   imports: [
@@ -18,7 +20,7 @@ import { Song } from './songs/song.entity';
       username: 'fundamentals',
       password: 'fundamentals',
       database: 'fundamentals',
-      entities: [Song],
+      entities: [Song, User, Artist],
       synchronize: true,
     })
   ],
