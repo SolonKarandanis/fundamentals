@@ -10,7 +10,7 @@ import {
 
 import { AuthService } from './auth.service';
 
-@Controller('auths')
+@Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
