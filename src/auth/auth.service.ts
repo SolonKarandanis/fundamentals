@@ -8,6 +8,7 @@ import { User } from 'src/users/user.entity';
 import { Enable2FAType, PayloadType } from './types';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import * as speakeasy from 'speakeasy';
 
 
 @Injectable()
@@ -16,7 +17,7 @@ export class AuthService {
         private userService: UsersService,
         private jwtService: JwtService,
         private artistsService: ArtistService,
-        private configService: ConfigService,
+        // private configService: ConfigService,
     ) {}
 
     async login(
@@ -107,7 +108,7 @@ export class AuthService {
     }
     
     getEnvVariable() {
-        return this.configService.get<number>('port');
+        // return this.configService.get<number>('port');
     }
 
 
