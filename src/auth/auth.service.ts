@@ -37,21 +37,21 @@ export class AuthService {
             const payload: PayloadType = { email: user.email, userId: user.id };
             const artist = await this.artistsService.findArtist(user.id); // 2
             if (artist) {
-            payload.artistId = artist.id;
+                payload.artistId = artist.id;
             }
             if (user.enable2FA && user.twoFASecret) {
             //1.
             // sends the validateToken request link
             // else otherwise sends the json web token in the response
-            return {
-                //2.
-                validate2FA: 'http://localhost:3000/auth/validate-2fa',
-                message:
-                'Please sends the one time password/token from your Google Authenticator App',
-            };
+                return {
+                    //2.
+                    validate2FA: 'http://localhost:3000/auth/validate-2fa',
+                    message:
+                    'Please sends the one time password/token from your Google Authenticator App',
+                };
             }
             return {
-            accessToken: this.jwtService.sign(payload),
+                accessToken: this.jwtService.sign(payload),
             };
         } else {
             throw new UnauthorizedException('Password does not match'); // 5.
