@@ -6,6 +6,7 @@ import * as bcrypt from 'bcryptjs';
 import { UpdateResult } from 'typeorm';
 import { User } from 'src/users/user.entity';
 import { Enable2FAType, PayloadType } from './types';
+import { JwtService } from '@nestjs/jwt';
 
 
 @Injectable()
