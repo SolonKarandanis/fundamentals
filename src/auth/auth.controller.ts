@@ -9,9 +9,16 @@ import {
 } from '@nestjs/common';
 
 import { AuthService } from './auth.service';
+import { UsersService } from 'src/users/users.service';
 
 @Controller('auth')
+// @ApiTags('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private userService: UsersService,
+    private authService: AuthService,
+  ) {}
+
+
 
 }
