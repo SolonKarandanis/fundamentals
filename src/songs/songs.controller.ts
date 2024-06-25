@@ -1,9 +1,10 @@
-import { Controller, Get, Put, Delete, Post, Body, Param, ParseIntPipe, HttpStatus, HttpException, Query, DefaultValuePipe } from '@nestjs/common';
+import { Controller, Get, Put, Delete, Post, Body, Param, ParseIntPipe, HttpStatus, HttpException, Query, DefaultValuePipe, UseGuards } from '@nestjs/common';
 import { SongsService } from './songs.service';
 import { CreateSongDTO } from './dto/create-song-dto';
 import { Song } from './song.entity';
 import { UpdateSongDto } from './dto/update-song-dto';
 import { DeleteResult, UpdateResult } from 'typeorm';
+import { ArtistJwtGuard } from 'src/auth/artists-jwt-guard';
 
 @Controller('songs')
 export class SongsController {
@@ -13,6 +14,7 @@ export class SongsController {
     ) {}
 
     @Post()
+    @UseGuards(ArtistJwtGuard)
     create(@Body() createSongDTO: CreateSongDTO) {
         return this.songsService.create(createSongDTO);
     }
@@ -34,8 +36,8 @@ export class SongsController {
     @Get(':id')
     findOne(
         @Param(
-        'id',
-        new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+            'id',
+            new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
         )
         id: number,
     ): Promise<Song> {
