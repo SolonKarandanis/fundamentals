@@ -12,20 +12,12 @@ import { SongsController } from './songs/songs.controller';
 import { SongsModule } from './songs/songs.module';
 import { User } from './users/user.entity';
 import { UsersModule } from './users/users.module';
+import { dataSourceOptions } from 'db/data-source';
 
 @Module({
   imports: [AuthModule, UsersModule, ArtistModule,
     SongsModule,
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'fundamentals',
-      password: 'fundamentals',
-      database: 'fundamentals',
-      entities: [Song, User, Artist],
-      synchronize: true,
-    })
+    TypeOrmModule.forRoot(dataSourceOptions)
   ],
   controllers: [AppController],
   providers: [AppService],
