@@ -1,4 +1,4 @@
-import { Controller, Get, Put, Delete, Post, Body, Param, ParseIntPipe, HttpStatus, HttpException, Query, DefaultValuePipe, UseGuards } from '@nestjs/common';
+import { Controller, Get, Put, Delete, Post, Body, Param, ParseIntPipe, HttpStatus, Query, DefaultValuePipe, UseGuards } from '@nestjs/common';
 import { SongsService } from './songs.service';
 import { CreateSongDTO } from './dto/create-song-dto';
 import { Song } from './song.entity';
