@@ -15,6 +15,7 @@ import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration';
 import { validate } from 'env.validation';
 
+
 @Module({
   imports: [PlaylistModule, AuthModule, UsersModule, ArtistModule,
     SongsModule,
