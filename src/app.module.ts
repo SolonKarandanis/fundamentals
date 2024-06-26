@@ -11,11 +11,20 @@ import { PlaylistModule } from './playlists/playlist.module';
 import { SongsController } from './songs/songs.controller';
 import { SongsModule } from './songs/songs.module';
 import { UsersModule } from './users/users.module';
+import { ConfigModule } from '@nestjs/config';
+import configuration from './config/configuration';
+import { validate } from 'env.validation';
 
 @Module({
   imports: [PlaylistModule, AuthModule, UsersModule, ArtistModule,
     SongsModule,
-    TypeOrmModule.forRoot(dataSourceOptions)
+    TypeOrmModule.forRoot(dataSourceOptions),
+    ConfigModule.forRoot({
+      envFilePath: ['.env.development', '.env.production'],
+      isGlobal: true,
+      load: [configuration],
+      validate: validate,
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
