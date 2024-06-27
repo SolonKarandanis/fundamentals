@@ -16,6 +16,7 @@ import { PlaylistModule } from './playlists/playlist.module';
 import { SongsController } from './songs/songs.controller';
 import { SongsModule } from './songs/songs.module';
 import { UsersModule } from './users/users.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 
 @Module({
@@ -28,6 +29,7 @@ import { UsersModule } from './users/users.module';
       load: [configuration],
       validate: validate,
     }),
+    ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [AppService],
