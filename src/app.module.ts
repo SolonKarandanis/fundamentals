@@ -11,6 +11,7 @@ import { AuthModule } from './auth/auth.module';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import configuration from './config/configuration';
 import { EventsModule } from './events/events.module';
+import { FileModule } from './file/file.module';
 import { PlaylistModule } from './playlists/playlist.module';
 import { SongsController } from './songs/songs.controller';
 import { SongsModule } from './songs/songs.module';
@@ -18,7 +19,7 @@ import { UsersModule } from './users/users.module';
 
 
 @Module({
-  imports: [EventsModule, PlaylistModule, AuthModule, UsersModule, ArtistModule,
+  imports: [FileModule, EventsModule, PlaylistModule, AuthModule, UsersModule, ArtistModule,
     SongsModule,
     TypeOrmModule.forRoot(dataSourceOptions),
     ConfigModule.forRoot({
