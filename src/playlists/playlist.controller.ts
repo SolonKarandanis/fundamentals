@@ -16,10 +16,7 @@ export class PlaylistController {
   constructor(private readonly playlistService: PlaylistService) {}
 
   @Post()
-  create(
-    @Body()
-    playlistDTO: CreatePlayListDto,
-  ): Promise<Playlist> {
+  create(@Body() playlistDTO: CreatePlayListDto): Promise<Playlist> {
     return this.playlistService.create(playlistDTO);
   }
 
